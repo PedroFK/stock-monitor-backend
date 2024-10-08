@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:alphavantage": "ts-node src/server-alphavantage.ts", 
-    "start:yahoo-finance": "ts-node src/server-yahoo-finance.ts"
+    "start:yahoo-finance": "ts-node src/server
+    .ts"
   },
   "keywords": [],
   "author": "",
