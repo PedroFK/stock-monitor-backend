@@ -28,11 +28,8 @@ app.get<{ Params: PriceParams }>('/price/:ticker', async (request, reply) => {
         const priceData = await getTickerPrice(ticker);
         reply.send(priceData);
     } catch (error) {
-        if (error instanceof Error) {
-            reply.status(500).send({ error: error.message });
-        } else {
-            reply.status(500).send({ error: 'Erro desconhecido' });
-        }
+        console.error('Erro ao buscar preço do ticker:', error);
+        reply.status(500).send({ error: error instanceof Error ? error.message : 'Erro desconhecido' });
     }
 });
 
