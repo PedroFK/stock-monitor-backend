@@ -6,15 +6,13 @@ dotenv.config();
 
 const app = fastify();
 
-const API_KEY = process.env.API_KEY; // Substitua pela sua chave de API
+const API_KEY = process.env.API_KEY;
 const API_URL = 'https://www.alphavantage.co/query';
 
-// Define a interface para os parâmetros
 interface PriceParams {
     ticker: string;
 }
 
-// Função para obter o preço do ticker
 const getTickerPrice = async (ticker: string) => {
     try {
         const response = await axios.get(API_URL, {
@@ -31,7 +29,6 @@ const getTickerPrice = async (ticker: string) => {
             throw new Error('Ticker não encontrado ou dados não disponíveis.');
         }
 
-        // Pega o primeiro registro (mais recente)
         const latestTimestamp = Object.keys(timeSeries)[0];
         const latestData = timeSeries[latestTimestamp];
         return {
@@ -48,7 +45,6 @@ const getTickerPrice = async (ticker: string) => {
     }
 };
 
-// Rota para obter o preço do ticker BBAS3
 app.get<{ Params: PriceParams }>('/price/:ticker', async (request, reply) => {
     const { ticker } = request.params;
 
@@ -64,7 +60,6 @@ app.get<{ Params: PriceParams }>('/price/:ticker', async (request, reply) => {
     }
 });
 
-// Iniciando o servidor
 const start = async () => {
     try {
         await app.listen({ port: 3000, host: '0.0.0.0' });
