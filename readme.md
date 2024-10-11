@@ -8,7 +8,7 @@ This project is the beginning of a backend application designed to monitor the p
 
 - Fetch real-time stock prices using Yahoo Finance.
 - Support for Brazilian stocks (e.g., `BBAS3.SA`, `ITUB4.SA`).
-- RESTful API built with Fastify and TypeScript.
+- REST API built with Fastify and TypeScript.
 
 ## Installation
 
@@ -28,7 +28,7 @@ To get started with the project, follow these steps:
 
 - **Fastify**: A web framework for Node.js.
 - **Yahoo Finance2**: A library to fetch stock market data.
-- **ts-node**: A TypeScript execution engine for Node.js, used for running TypeScript files directly.
+- **tsx**: A fast TypeScript execution engine for Node.js, designed to run TypeScript files directly.
 
 3. Create a .env file in the root directory and add your environment variables:
     ```bash
