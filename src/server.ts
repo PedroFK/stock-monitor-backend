@@ -1,46 +1,11 @@
-import fastify from 'fastify';
-import yahooFinance from 'yahoo-finance2';
+import { fastify } from "fastify";
 
-const app = fastify();
+export const app = fastify();
 
-interface PriceParams {
-    ticker: string;
-}
-
-const getTickerPrice = async (ticker: string) => {
-    try {
-        const result = await yahooFinance.quote(ticker);
-        return {
-            symbol: result.symbol,
-            price: result.regularMarketPrice,
-            timestamp: result.regularMarketTime,
-        };
-    } catch (error) {
-        console.error('Erro ao buscar preço do ticker:', error);
-        throw new Error('Erro ao buscar preço do ticker');
+app.listen({ port: 3200, host: '0.0.0.0' }, (err, address) => {
+    if (err) {
+        console.log(err)
     }
-};
 
-app.get<{ Params: PriceParams }>('/price/:ticker', async (request, reply) => {
-    const { ticker } = request.params;
-
-    try {
-        const priceData = await getTickerPrice(ticker);
-        reply.send(priceData);
-    } catch (error) {
-        console.error('Erro ao buscar preço do ticker:', error);
-        reply.status(500).send({ error: error instanceof Error ? error.message : 'Erro desconhecido' });
-    }
-});
-
-const start = async () => {
-    try {
-        await app.listen({ port: 4000, host: '0.0.0.0' });
-        console.log('Servidor Yahoo Finance rodando em http://localhost:4000');
-    } catch (err) {
-        app.log.error(err);
-        process.exit(1);
-    }
-};
-
-start();
+    console.log('server is running')
+})
